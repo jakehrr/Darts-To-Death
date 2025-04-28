@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour
 
         dart.anchoredPosition = new Vector2(dartPosX, dartPosY);
 
+        // Calculator Angle Test
+        int sectionHit = GetComponent<DartBoardHitCalculator>().GetDartboardSection(dart.anchoredPosition);
+        Debug.Log("Number Hit: " + sectionHit);
+
         StartCoroutine(BeginThrowReset());
         isPlayer1sTurn = !isPlayer1sTurn;
         if (isPlayer1sTurn)

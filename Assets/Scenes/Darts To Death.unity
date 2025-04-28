@@ -7482,6 +7482,7 @@ GameObject:
   - component: {fileID: 1480809303}
   - component: {fileID: 1480809305}
   - component: {fileID: 1480809306}
+  - component: {fileID: 1480809307}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -7568,6 +7569,18 @@ MonoBehaviour:
   progress: 0
   powerSelected: 0
   SelectedVerticalPower: 0
+--- !u!114 &1480809307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480809302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220200b4a8ead5347859b7983a40d6ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1531217339
 PrefabInstance:
   m_ObjectHideFlags: 0
