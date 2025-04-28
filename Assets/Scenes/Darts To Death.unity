@@ -10971,6 +10971,28 @@ MonoBehaviour:
   mainDartsUI: {fileID: 717411012}
   player1Text: {fileID: 1777877857}
   player2Text: {fileID: 1114984054}
+  player1scores:
+  - {fileID: 1911732236}
+  - {fileID: 687727155}
+  - {fileID: 313544064}
+  - {fileID: 1527841881}
+  - {fileID: 576676143}
+  - {fileID: 342217301}
+  - {fileID: 813642483}
+  - {fileID: 1589968505}
+  - {fileID: 78009697}
+  - {fileID: 1262346343}
+  player2scores:
+  - {fileID: 1432480561}
+  - {fileID: 1104269479}
+  - {fileID: 180748379}
+  - {fileID: 1110230364}
+  - {fileID: 2044571433}
+  - {fileID: 1702217003}
+  - {fileID: 832518075}
+  - {fileID: 276133883}
+  - {fileID: 573035108}
+  - {fileID: 942506603}
   horizontalPowerScript: {fileID: 1480809305}
   verticalPowerScript: {fileID: 1480809306}
   selectedHorizontalPower: 0

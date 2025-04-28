@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject mainDartsUI;
     public GameObject player1Text;
     public GameObject player2Text;
+    public TextMeshProUGUI[] player1scores;
+    public TextMeshProUGUI[] player2scores;
 
     [Header("Script Accessing")]
     public HorizontalPower horizontalPowerScript;
@@ -19,6 +22,8 @@ public class GameManager : MonoBehaviour
     public float selectedHorizontalPower;
     public float selectedVerticalPower;
     public bool isPlayer1sTurn = true;
+    public int player1ScoreIndex;
+    public int player2ScoreIndex;
 
     [Header("Dartboard Info")]
     public RectTransform dartboard;
@@ -66,20 +71,34 @@ public class GameManager : MonoBehaviour
 
         // Calculator Angle Test
         int sectionHit = GetComponent<DartBoardHitCalculator>().GetDartboardSection(dart.anchoredPosition);
-        Debug.Log("Number Hit: " + sectionHit);
 
-        StartCoroutine(BeginThrowReset());
-        isPlayer1sTurn = !isPlayer1sTurn;
         if (isPlayer1sTurn)
         {
             player1Text.SetActive(true);
             player2Text.SetActive(false);
+
+            if(player1ScoreIndex < player1scores.Length)
+            {
+                player1scores[player1ScoreIndex].gameObject.SetActive(true);
+                player1scores[player1ScoreIndex].text = sectionHit.ToString();
+                player1ScoreIndex++;
+            }
         }
-        else
+        else if(!isPlayer1sTurn)
         {
             player1Text.SetActive(false);
             player2Text.SetActive(true);
+
+            if (player2ScoreIndex < player2scores.Length)
+            {
+                player2scores[player2ScoreIndex].gameObject.SetActive(true);
+                player2scores[player2ScoreIndex].text = sectionHit.ToString();
+                player2ScoreIndex++;
+            }
         }
+        isPlayer1sTurn = !isPlayer1sTurn;
+
+        StartCoroutine(BeginThrowReset());
     }
 
     private void ResetThrowState()
