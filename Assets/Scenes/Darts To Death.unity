@@ -7504,10 +7504,13 @@ MonoBehaviour:
   mainCamAnimator: {fileID: 330585548}
   doorAnimator: {fileID: 248825501}
   mainDartsUI: {fileID: 717411012}
+  player1Text: {fileID: 1777877857}
+  player2Text: {fileID: 1114984054}
   horizontalPowerScript: {fileID: 1480809305}
   verticalPowerScript: {fileID: 1480809306}
   selectedHorizontalPower: 0
   selectedVerticalPower: 0
+  isPlayer1sTurn: 1
   dartboard: {fileID: 400852018}
   dart: {fileID: 251444906}
 --- !u!4 &1480809304

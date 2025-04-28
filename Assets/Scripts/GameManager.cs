@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Animators and Visuals")]
     public Animator mainCamAnimator;
     public Animator doorAnimator;
     public GameObject mainDartsUI;
+    public GameObject player1Text;
+    public GameObject player2Text;
 
+    [Header("Script Accessing")]
     public HorizontalPower horizontalPowerScript;
     public VerticalPower verticalPowerScript;
 
+    [Header("User Variables")]
     public float selectedHorizontalPower;
     public float selectedVerticalPower;
+    public bool isPlayer1sTurn = true;
 
+    [Header("Dartboard Info")]
     public RectTransform dartboard;
     public RectTransform dart;
 
@@ -58,6 +65,17 @@ public class GameManager : MonoBehaviour
         dart.anchoredPosition = new Vector2(dartPosX, dartPosY);
 
         StartCoroutine(BeginThrowReset());
+        isPlayer1sTurn = !isPlayer1sTurn;
+        if (isPlayer1sTurn)
+        {
+            player1Text.SetActive(true);
+            player2Text.SetActive(false);
+        }
+        else
+        {
+            player1Text.SetActive(false);
+            player2Text.SetActive(true);
+        }
     }
 
     private void ResetThrowState()

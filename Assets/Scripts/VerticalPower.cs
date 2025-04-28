@@ -19,18 +19,19 @@ public class VerticalPower : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            powerSelected = true;
+            if (!powerSelected)
+            {
+                powerSelected = true;
+                SelectedVerticalPower = progress;
+
+                GetComponent<GameManager>().selectedVerticalPower = SelectedVerticalPower;
+                GetComponent<GameManager>().PlaceDart();
+            }
         }
 
         if (!powerSelected)
         {
             HorizontalPowerSlide();
-        }
-        else if (powerSelected)
-        {
-            SelectedVerticalPower = progress;
-            GetComponent<GameManager>().selectedVerticalPower = SelectedVerticalPower;
-            GetComponent<GameManager>().PlaceDart();
         }
     }
 
