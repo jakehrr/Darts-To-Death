@@ -7,6 +7,7 @@ public class VerticalPower : MonoBehaviour
     public RectTransform powerIndicator;
     public RectTransform bottomPoint;  
     public RectTransform topPoint;    
+    public RectTransform centrePoint;    
     public float speed = 1f;             
 
     public bool movingRight = true;

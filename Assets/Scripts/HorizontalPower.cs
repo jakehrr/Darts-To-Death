@@ -8,6 +8,7 @@ public class HorizontalPower : MonoBehaviour
     public RectTransform powerIndicator;
     public RectTransform leftPoint;  
     public RectTransform rightPoint;    
+    public RectTransform centrePoint;    
     public float speed = 1f;             
 
     public bool movingRight = true;

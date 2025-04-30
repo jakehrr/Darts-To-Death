@@ -175,24 +175,26 @@ public class GameManager : MonoBehaviour
         // Reset GameManager variables
         selectedHorizontalPower = 0f;
         selectedVerticalPower = 0f;
+        xValuePreviewVal = 0.5f; 
+        yValuePreviewVal = 0.5f; 
 
         // Reset the dart position to center (or wherever you want it idle)
         dart.anchoredPosition = Vector2.zero;
 
         // Reset Horizontal Power script
-        horizontalPowerScript.progress = 0f;
+        horizontalPowerScript.progress = 0.5f;
         horizontalPowerScript.movingRight = true;
         horizontalPowerScript.powerSelected = false;
         horizontalPowerScript.SelectedHorizontalPower = 0f;
-        horizontalPowerScript.powerIndicator.position = horizontalPowerScript.leftPoint.position;
+        horizontalPowerScript.powerIndicator.position = horizontalPowerScript.centrePoint.position;
         horizontalPowerScript.enabled = false;
 
         // Reset Vertical Power script
-        verticalPowerScript.progress = 0f;
+        verticalPowerScript.progress = 0.5f;
         verticalPowerScript.movingRight = true;
         verticalPowerScript.powerSelected = false;
         verticalPowerScript.SelectedVerticalPower = 0f;
-        verticalPowerScript.powerIndicator.position = verticalPowerScript.bottomPoint.position;
+        verticalPowerScript.powerIndicator.position = verticalPowerScript.centrePoint.position;
         verticalPowerScript.enabled = false;
     }
 
