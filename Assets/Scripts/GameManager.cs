@@ -118,6 +118,10 @@ public class GameManager : MonoBehaviour
         {
             multiplier = 2;
         }
+        else if(distanceFromCentre > 445f)
+        {
+            sectionHit = 0;
+        }
         else if(distanceFromCentre <= 38) // Bullseye Hit
         {
             sectionHit = 50;
