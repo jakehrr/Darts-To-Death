@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [Header("User Variables")]
     public float selectedHorizontalPower;
     public float selectedVerticalPower;
+    public float xValuePreviewVal;
+    public float yValuePreviewVal;
     public bool isPlayer1sTurn = true;
     public int player1ScoreIndex;
     public int player2ScoreIndex;
@@ -66,15 +68,28 @@ public class GameManager : MonoBehaviour
         BeginHorizontalPower();
     }
 
-   /* private void Update()
-    {
+    private void Update()
+    { 
+     /* THIS SECTION OF CODE IS FOR DEBUGGING THE DISTANCE OF THE AIM POINT FROM THE CENTRE OF THE BOARD
+      * 
         Vector2 centrePointPosition = centrePoint.position;
         Vector2 dartPosition = dart.anchoredPosition;
-
         float distanceFromCentre = Vector2.Distance(centrePointPosition, dartPosition);
+        Debug.Log(distanceFromCentre); 
+     */
 
-        Debug.Log(distanceFromCentre);
-    }*/
+        UpdateDotPreview();
+    }
+
+    public void UpdateDotPreview()
+    {
+        Vector2 dartboardSize = dartboard.rect.size;
+
+        float xPos = (xValuePreviewVal * dartboardSize.x) - (dartboardSize.x / 2f);
+        float yPos = (yValuePreviewVal * dartboardSize.y) - (dartboardSize.y / 2f);
+
+        dart.anchoredPosition = new Vector2(xPos, yPos);
+    }
 
     public void PlaceDart()
     {
@@ -92,7 +107,7 @@ public class GameManager : MonoBehaviour
         Vector2 centrePointPosition = centrePoint.position;
         Vector2 dartPosition = dart.anchoredPosition;
         float distanceFromCentre = Vector2.Distance(centrePointPosition, dartPosition);
-        
+         
         // Base Multiplier
         int multiplier = 1;
         if(distanceFromCentre >= 249 && distanceFromCentre <= 287) // Triple Score Multiplier

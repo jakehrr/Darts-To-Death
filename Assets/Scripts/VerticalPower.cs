@@ -10,7 +10,7 @@ public class VerticalPower : MonoBehaviour
     public float speed = 1f;             
 
     public bool movingRight = true;
-    public float progress = 0f;
+    public float progress = 0.5f;
 
     public bool powerSelected = false;
     public float SelectedVerticalPower = 0;
@@ -33,6 +33,8 @@ public class VerticalPower : MonoBehaviour
         {
             HorizontalPowerSlide();
         }
+
+        GetComponent<GameManager>().yValuePreviewVal = progress;
     }
 
     private void HorizontalPowerSlide()

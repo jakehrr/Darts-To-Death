@@ -33,6 +33,8 @@ public class HorizontalPower : MonoBehaviour
             GetComponent<GameManager>().selectedHorizontalPower = SelectedHorizontalPower;
             GetComponent<GameManager>().BeginVerticalPower();
         }
+
+        GetComponent<GameManager>().xValuePreviewVal = progress;
     }
 
     private void HorizontalPowerSlide()
