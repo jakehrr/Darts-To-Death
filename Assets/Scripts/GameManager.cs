@@ -95,13 +95,17 @@ public class GameManager : MonoBehaviour
 
     public void PlaceDart()
     {
+        // Get the size of the dartboard. 
         Vector2 dartboardSize = dartboard.rect.size;
 
+        // Calculate the position of the dart on the X and Y axis.
         float dartPosX = (selectedHorizontalPower * dartboardSize.x) - (dartboardSize.x / 2f);
         float dartPosY = (selectedVerticalPower * dartboardSize.y) - (dartboardSize.y / 2f);
 
+        // Set the darts target location to these calculated dart positions.
         dart.anchoredPosition = new Vector2(dartPosX, dartPosY);
 
+        // Change what the active dart is.
         if (isPlayer1sTurn)
         {
             player1PhysicalDart.GetComponent<DartHandler>().SlerpDartToPos();
@@ -110,7 +114,6 @@ public class GameManager : MonoBehaviour
         {
             player2PhysicalDart.GetComponent<DartHandler>().SlerpDartToPos();
         }
-
 
         // Get Landing Score (Un-Multiplied)
         int sectionHit = GetComponent<DartBoardHitCalculator>().GetDartboardSection(dart.anchoredPosition);
