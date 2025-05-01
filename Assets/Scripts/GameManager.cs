@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     public RectTransform dartboard;
     public RectTransform dart;
     public RectTransform centrePoint;
+    public GameObject player1PhysicalDart;
+    public GameObject player2PhysicalDart;
 
     public void BeginGame()
     {
@@ -99,6 +101,16 @@ public class GameManager : MonoBehaviour
         float dartPosY = (selectedVerticalPower * dartboardSize.y) - (dartboardSize.y / 2f);
 
         dart.anchoredPosition = new Vector2(dartPosX, dartPosY);
+
+        if (isPlayer1sTurn)
+        {
+            player1PhysicalDart.GetComponent<DartHandler>().SlerpDartToPos();
+        }
+        else
+        {
+            player2PhysicalDart.GetComponent<DartHandler>().SlerpDartToPos();
+        }
+
 
         // Get Landing Score (Un-Multiplied)
         int sectionHit = GetComponent<DartBoardHitCalculator>().GetDartboardSection(dart.anchoredPosition);
@@ -200,6 +212,21 @@ public class GameManager : MonoBehaviour
         verticalPowerScript.SelectedVerticalPower = 0f;
         verticalPowerScript.powerIndicator.position = verticalPowerScript.centrePoint.position;
         verticalPowerScript.enabled = false;
+
+        // Reset Physical Darts
+        player1PhysicalDart.transform.position = new Vector3(-0.042f, 1.659f, 4.994f);
+        player2PhysicalDart.transform.position = new Vector3(-0.042f, 1.659f, 4.994f);
+
+        if (isPlayer1sTurn)
+        {
+            player1PhysicalDart.SetActive(true);
+            player2PhysicalDart.SetActive(false);
+        }
+        else
+        {
+            player1PhysicalDart.SetActive(false);
+            player2PhysicalDart.SetActive(true);
+        }
     }
 
     private IEnumerator BeginThrowReset()
