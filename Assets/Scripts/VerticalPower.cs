@@ -16,6 +16,7 @@ public class VerticalPower : MonoBehaviour
     public bool powerSelected = false;
     public float SelectedVerticalPower = 0;
 
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

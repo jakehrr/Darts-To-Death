@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 public class GameManager : MonoBehaviour
 {
     [Header("Animators and Visuals")]
+    [SerializeField] private GameObject mainMenuUI;
     public Animator mainCamAnimator;
     public Animator doorAnimator;
     public GameObject mainDartsUI;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int player2ScoreIndex;
     public int currentPlayer1Score;
     public int currentPlayer2Score;
+    private bool isGameOver = false;
 
     [Header("Dartboard Info")]
     public RectTransform dartboard;
@@ -38,6 +40,11 @@ public class GameManager : MonoBehaviour
     public RectTransform centrePoint;
     public GameObject player1PhysicalDart;
     public GameObject player2PhysicalDart;
+
+    [Header("Audio & Sound Effects")]
+    [SerializeField] private AudioSource soundEffects;
+    [SerializeField] private AudioClip throwSFX;
+    [SerializeField] private AudioClip dartboardHitSFX;
 
     public void BeginGame()
     {
@@ -81,6 +88,7 @@ public class GameManager : MonoBehaviour
      */
 
         UpdateDotPreview();
+        EndTheGame();
     }
 
     public void UpdateDotPreview()
@@ -95,6 +103,9 @@ public class GameManager : MonoBehaviour
 
     public void PlaceDart()
     {
+        soundEffects.PlayOneShot(throwSFX);
+        StartCoroutine(DelayHitSoundEffect());
+
         // Get the size of the dartboard. 
         Vector2 dartboardSize = dartboard.rect.size;
 
@@ -235,7 +246,30 @@ public class GameManager : MonoBehaviour
     private IEnumerator BeginThrowReset()
     {
         DisplayTextUserChange();
+
         yield return new WaitForSeconds(2f);
         ResetThrowState();
+    }
+
+    private void EndTheGame()
+    {
+        if(player2ScoreIndex == 10)
+        {
+            // GAME OVER!
+            mainMenuUI.SetActive(false);
+            Destroy(GetComponent<HorizontalPower>());
+            Destroy(GetComponent<VerticalPower>());
+            Destroy(mainDartsUI);
+            GetComponent<EndGame>().enabled = true;
+            GetComponent<EndGame>().player1FinalScore = currentPlayer1Score;
+            GetComponent<EndGame>().player2FinalScore = currentPlayer2Score;
+            Destroy(this.gameObject.GetComponent<GameManager>());   
+        }
+    }
+
+    private IEnumerator DelayHitSoundEffect()
+    {
+        yield return new WaitForSeconds(0.35f);
+        soundEffects.PlayOneShot(dartboardHitSFX);
     }
 }
