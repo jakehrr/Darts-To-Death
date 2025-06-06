@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class EndGame : MonoBehaviour
     [SerializeField] private GameObject player2Character;
 
     [SerializeField] private GameObject[] endGameObjects;
+    [SerializeField] private GameObject finalGameUI;
 
     [SerializeField] private TextMeshProUGUI endGameFinalText;
     [SerializeField] private AudioSource soundEffects;
@@ -61,7 +63,10 @@ public class EndGame : MonoBehaviour
         mainCamera.GetComponent<Animator>().SetBool("EndGame", true);
         soundEffects.PlayOneShot(winSFX);
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(4f);
+        finalGameUI.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
         soundEffects.PlayOneShot(gunshotSFX);
     }
 
@@ -78,5 +83,15 @@ public class EndGame : MonoBehaviour
         }
 
         music.volume = endVolume;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
