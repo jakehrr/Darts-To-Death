@@ -45,12 +45,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource soundEffects;
     [SerializeField] private AudioClip throwSFX;
     [SerializeField] private AudioClip dartboardHitSFX;
+    [SerializeField] private AudioClip doorOpen;
 
-    public void BeginGame()
+   
+    public void StartGameTrigger()
     {
-        mainCamAnimator.SetBool("BeginGame", true);
-        doorAnimator.SetBool("BeginGame", true);
-        StartCoroutine(DisplayDartsUI());
+        StartCoroutine(BeginGame());
     }
 
     public void BeginHorizontalPower()
@@ -68,9 +68,17 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    private IEnumerator DisplayDartsUI()
+    private IEnumerator BeginGame()
     {
-        yield return new WaitForSeconds(2f);
+        mainMenuUI.GetComponent<Animator>().SetBool("ShrinkUI", true);
+        yield return new WaitForSeconds(1.5f);
+        mainCamAnimator.SetBool("BeginGame", true);
+        doorAnimator.SetBool("BeginGame", true);
+
+        yield return new WaitForSeconds(1f);
+        soundEffects.PlayOneShot(doorOpen);
+
+        yield return new WaitForSeconds(1f);
         mainDartsUI.SetActive(true);
 
         yield return new WaitForSeconds(2f);
@@ -78,14 +86,14 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update()
-    { 
-     /* THIS SECTION OF CODE IS FOR DEBUGGING THE DISTANCE OF THE AIM POINT FROM THE CENTRE OF THE BOARD
-      * 
-        Vector2 centrePointPosition = centrePoint.position;
-        Vector2 dartPosition = dart.anchoredPosition;
-        float distanceFromCentre = Vector2.Distance(centrePointPosition, dartPosition);
-        Debug.Log(distanceFromCentre); 
-     */
+    {
+        /* THIS SECTION OF CODE IS FOR DEBUGGING THE DISTANCE OF THE AIM POINT FROM THE CENTRE OF THE BOARD
+         * 
+           Vector2 centrePointPosition = centrePoint.position;
+           Vector2 dartPosition = dart.anchoredPosition;
+           float distanceFromCentre = Vector2.Distance(centrePointPosition, dartPosition);
+           Debug.Log(distanceFromCentre); 
+        */
 
         UpdateDotPreview();
         EndTheGame();
