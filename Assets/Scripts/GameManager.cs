@@ -47,6 +47,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip dartboardHitSFX;
     [SerializeField] private AudioClip doorOpen;
 
+    [Header("Character Selection Models")]
+    [SerializeField] private GameObject[] player1CharacterVisual;
+    [SerializeField] private GameObject[] player2CharacterVisual;
+    [SerializeField] private int player1CharacterSelectIndex;
+    [SerializeField] private int player2CharacterSelectIndex;
+
    
     public void StartGameTrigger()
     {
@@ -281,5 +287,87 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.35f);
         soundEffects.PlayOneShot(dartboardHitSFX);
+    }
+
+    public void EnterCharacterSelect()
+    {
+        mainCamAnimator.SetBool("InCharacterSelect", true);
+    }
+
+    public void ExitCharacterSelect()
+    {
+        mainCamAnimator.SetBool("InCharacterSelect", false);
+    }
+
+    public void IncrementCharacterSelectionP1()
+    {
+        player1CharacterSelectIndex++;
+
+        if (player1CharacterSelectIndex > 13)
+        {
+            player1CharacterSelectIndex = 0;
+        }
+
+        foreach (GameObject GO in player1CharacterVisual)
+        {
+            GO.SetActive(false);
+        }
+
+        player1CharacterVisual[player1CharacterSelectIndex].gameObject.SetActive(true);
+
+     
+    }
+
+    public void DecrementCharacterSelectionP1()
+    {
+        player1CharacterSelectIndex--;
+
+        if (player1CharacterSelectIndex < 0)
+        {
+            player1CharacterSelectIndex = 13;
+        }
+
+        foreach (GameObject GO in player1CharacterVisual)
+        {
+            GO.SetActive(false);
+        }
+
+        player1CharacterVisual[player1CharacterSelectIndex].gameObject.SetActive(true);
+    }
+
+    public void IncrementCharacterSelectionP2()
+    {
+        player2CharacterSelectIndex++;
+
+        if (player2CharacterSelectIndex > 13)
+        {
+            player2CharacterSelectIndex = 0;
+        }
+
+        foreach (GameObject GO in player2CharacterVisual)
+        {
+            GO.SetActive(false);
+        }
+
+        player2CharacterVisual[player2CharacterSelectIndex].gameObject.SetActive(true);
+
+
+    }
+
+    public void DecrementCharacterSelectionP2()
+    {
+        player2CharacterSelectIndex--;
+
+        if (player2CharacterSelectIndex < 0)
+        {
+            player2CharacterSelectIndex = 13;
+        }
+
+        foreach (GameObject GO in player2CharacterVisual)
+        {
+            GO.SetActive(false);
+        }
+
+        player2CharacterVisual[player2CharacterSelectIndex].gameObject.SetActive(true);
     }
 }
