@@ -239,6 +239,8 @@ public class GameManager : MonoBehaviour
         player1PhysicalDart.transform.position = new Vector3(-0.042f, 1.659f, 4.994f);
         player2PhysicalDart.transform.position = new Vector3(-0.042f, 1.659f, 4.994f);
 
+        BeginHorizontalPower();
+
         if (isPlayer1sTurn)
         {
             player1PhysicalDart.SetActive(true);
